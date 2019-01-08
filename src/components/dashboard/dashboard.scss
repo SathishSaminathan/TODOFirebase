@@ -1,0 +1,35 @@
+.messagelist_style {
+  max-height: 600px;
+  overflow-y: auto;
+  .card {
+    // left: -100px;
+    animation: 0.5s ease-out 0s 1 upToDown;
+    .card-action {
+      padding: 1px 0px;
+    }
+    .card-content {
+      padding: 5px;
+      p {
+        margin: 5px;
+      }
+    }
+  }
+}
+
+@keyframes slideInFromLeft {
+  0% {
+    transform: translateX(-100%);
+  }
+  100% {
+    transform: translateX(0);
+  }
+}
+
+@keyframes upToDown {
+  0% {
+    transform: translateY(-100%);
+  }
+  100% {
+    transform: translateY(0);
+  }
+}
