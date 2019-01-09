@@ -7,7 +7,7 @@ class MessageList extends Component {
   state = {
     MessagesRef: firebase.database().ref("messages"),
     // Messages: [{ id: 123, name: "sathish" }, { id: 2323, name: "saminathan" }]
-    Messages:[]
+    Messages: []
   };
 
   timeFromNow = timestamp => moment(timestamp).fromNow();
@@ -20,7 +20,9 @@ class MessageList extends Component {
     let messageData = [];
     this.state.MessagesRef.on("child_added", snap => {
       messageData.push(snap.val());
-      this.setState({ Messages: messageData },()=>console.log("Messages...",this.state.Messages));
+      this.setState({ Messages: messageData }, () =>
+        console.log("Messages...", this.state.Messages)
+      );
     });
     console.log("messagesData....", messageData);
     this.setState(
@@ -30,6 +32,16 @@ class MessageList extends Component {
       () => console.log("this.state.message...", this.state.Messages)
     );
     // console.log("this.state.message...", this.state.Messages)
+  };
+
+  componentDidUpdate() {
+    // alert("componentDidUpdate")
+    this.scrollToBottom();
+  }
+
+  scrollToBottom = () => {
+    if(this.messagesEnd)
+    this.messagesEnd.scrollIntoView({ behavior: "smooth" });
   };
 
   renderMessages = messages => {
@@ -42,6 +54,9 @@ class MessageList extends Component {
         </div>
         <div className="card-action grey lighten-2">
           <p className="black-text">"{message.content}"</p>
+        </div>
+        <div style={{ float:"left", clear: "both" }}
+             ref={(el) => { this.messagesEnd = el; }}>
         </div>
       </div>
     ));
