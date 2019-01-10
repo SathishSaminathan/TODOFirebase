@@ -18,6 +18,12 @@ class MessageList extends Component {
 
   addMessageListener = () => {
     let messageData = [];
+    this.state.MessagesRef.orderByChild("content")
+      .startAt("a")
+      .endAt("a\uf8ff")
+      .on("value", snap => {
+        console.log("working...", snap.val());
+      });
     this.state.MessagesRef.on("child_added", snap => {
       messageData.push(snap.val());
       this.setState({ Messages: messageData }, () =>
@@ -40,8 +46,8 @@ class MessageList extends Component {
   }
 
   scrollToBottom = () => {
-    if(this.messagesEnd)
-    this.messagesEnd.scrollIntoView({ behavior: "smooth" });
+    if (this.messagesEnd)
+      this.messagesEnd.scrollIntoView({ behavior: "smooth" });
   };
 
   renderMessages = messages => {
@@ -55,9 +61,12 @@ class MessageList extends Component {
         <div className="card-action grey lighten-2">
           <p className="black-text">"{message.content}"</p>
         </div>
-        <div style={{ float:"left", clear: "both" }}
-             ref={(el) => { this.messagesEnd = el; }}>
-        </div>
+        <div
+          style={{ float: "left", clear: "both" }}
+          ref={el => {
+            this.messagesEnd = el;
+          }}
+        />
       </div>
     ));
     return loadedMessages;

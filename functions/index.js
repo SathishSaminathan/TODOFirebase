@@ -22,7 +22,7 @@ const createNotification = (notification, event) => {
 };
 
 exports.messageAdded = functions.database
-  .ref("/messages/{messagesId}")
+  .ref("messages/{messagesId}")
   .onCreate(event => {
     const notification = {
       addedBy: event._data.user.name,
