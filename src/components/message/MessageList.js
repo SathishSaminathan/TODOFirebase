@@ -10,8 +10,6 @@ class MessageList extends Component {
     Messages: []
   };
 
-  timeFromNow = timestamp => moment(timestamp).fromNow();
-
   componentDidMount() {
     this.addMessageListener();
   }
@@ -50,24 +48,40 @@ class MessageList extends Component {
       this.messagesEnd.scrollIntoView({ behavior: "smooth" });
   };
 
+  timeFromNow = timestamp => moment(timestamp).fromNow();
+
   renderMessages = messages => {
     let loadedMessages = [];
     loadedMessages = this.state.Messages.map((message, i) => (
-      <div className="card" key={i}>
-        {/* <span className="card-title">Sathish</span> */}
-        <div className="card-content">
-          <span>Sathish {this.timeFromNow(message.timestamp)}</span>
-        </div>
-        <div className="card-action grey lighten-2">
-          <p className="black-text">"{message.content}"</p>
-        </div>
-        <div
-          style={{ float: "left", clear: "both" }}
-          ref={el => {
-            this.messagesEnd = el;
-          }}
-        />
-      </div>
+      // <div className="card" key={i}>
+      //   {/* <span className="card-title">Sathish</span> */}
+      //   <div className="card-content">
+      //     <span>Sathish {this.timeFromNow(message.timestamp)}</span>
+      //   </div>
+      //   <div className="card-action grey lighten-2">
+      //     <p className="black-text">"{message.content}"</p>
+      //   </div>
+      //   <div
+      //     style={{ float: "left", clear: "both" }}
+      //     ref={el => {
+      //       this.messagesEnd = el;
+      //     }}
+      //   />
+      // </div>
+      <ul class="collection">
+        <li class="collection-item avatar">
+          <img src="images/yuna.jpg" alt="" class="circle" />
+          <p>{message.content}</p>
+          <a
+            href="#!"
+            class="secondary-content"
+            ref={el => {
+              this.messagesEnd = el;
+            }}
+          />
+          <i class="material-icons">{this.timeFromNow(message.timestamp)}</i>
+        </li>
+      </ul>
     ));
     return loadedMessages;
   };

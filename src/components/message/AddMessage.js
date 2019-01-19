@@ -1,6 +1,8 @@
 import React, { Component } from "react";
 import firebase from "../../config/firebaseConfig";
 
+import './message.css';
+
 class AddMessage extends Component {
   state = {
     MessagesRef: firebase.database().ref("messages"),
@@ -38,7 +40,7 @@ class AddMessage extends Component {
   render() {
     return (
       <div className="container">
-        <form className=" " onSubmit={this.handleSubmit}>
+        <form className="input_area" onSubmit={this.handleSubmit}>
           <h5>Create Message</h5>
           <div className="input-field">
             <label>Message Content</label>
@@ -49,7 +51,7 @@ class AddMessage extends Component {
             />
           </div>
           <div className="input-field">
-            <button className="btn pink">Create</button>
+            {/* <button className="btn pink">Create</button> */}
           </div>
         </form>
       </div>
